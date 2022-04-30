@@ -2,7 +2,7 @@ import requests
 import json
 from os import system
 system("title Stats Rinaorc by Krystal#6960")
-system("mode 78, 10")
+
 def clear():
     system("cls")
 with open("settings.json", "r") as f:
@@ -28,13 +28,12 @@ def menu():
         print(f'''
             : Player Information :
             
-        Rinaorc ID: {playerData["id"]}
         Minecraft UUID: {playerData["uuid"]}
         Rank: {playerData["rank"]["name"]}
         Status: {online}
         Connection Method: {playerData["connectionMethod"]}
         
-        Discord ID: {playerData["links"]["discord"]["user_id"]}
+        Discord ID: {playerData["links"]["discord"]}
         Booster: {playerData["hasBoost"]}
         
         Aura: {playerData["aura"]}''')
@@ -112,7 +111,6 @@ def menu():
         system("mode 50, 35")
         print(f'''
             : Server Info :
-        Registered Players: {serverInfo["registeredPlayers"]}
         Active Player: {serverInfo["activePlayers"]}
         Online Players: {serverInfo["onlinePlayers"]}
 
@@ -141,8 +139,7 @@ def menu():
         Smash: {serverInfo["games"]["smash"]["players"]}
         The Purge: {serverInfo["games"]["thepurge"]["players"]}
         UHC: {serverInfo["games"]["uhc"]["players"]}
-        Warfare: {serverInfo["games"]["warfare"]["players"]}
-        Warzone: {serverInfo["games"]["warzone"]["players"]}''')
+        Warfare: {serverInfo["games"]["warfare"]["players"]}''')
         input()
     
 while True:
