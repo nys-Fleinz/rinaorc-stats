@@ -2,10 +2,9 @@ import requests
 import json
 from os import system
 system("title Stats Rinaorc by Krystal#6960")
-
+system("mode 78, 10")
 def clear():
     system("cls")
-    system("mode 78, 200")
 with open("settings.json", "r") as f:
     config = json.load(f)
 header = {"API-Key": config["APIKey"]}
