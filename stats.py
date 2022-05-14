@@ -1,3 +1,4 @@
+import datetime
 import requests
 import json
 from os import system
@@ -18,10 +19,10 @@ serverInfo = a.json()
 def menu():
     clear()
     system("mode 78, 10")
-    choice = input("\n\n\n                                Choose Info:\n        [1] User Info        [2] BedWars Info        [3] Server Info\n\n                                 Choice: ")
+    choice = input("\n                                Choose Info:\n\n        [1] User Info        [2] BedWars Info        [3] Server Info\n\n        [4] Clan Info\n\n                                 Choice: ")
     clear()
     if choice == "1":
-        system("mode 78, 200")
+        system("mode 78, 25")
         playerData = data["player"]
         if playerData["isOnline"] == True: online="Online"
         else: online="Offline"
@@ -31,13 +32,23 @@ def menu():
         Minecraft UUID: {playerData["uuid"]}
         Rank: {playerData["rank"]["name"]}
         Status: {online}
+        Aura: {playerData["aura"]}
         Connection Method: {playerData["connectionMethod"]}
-        
+
+            :       Discord      :
         Discord ID: {playerData["links"]["discord"]}
         Booster: {playerData["hasBoost"]}
-        
-        Aura: {playerData["aura"]}''')
+
+            :        Clan        :
+        Name: {playerData["clan"]["name"]}
+        ID: {playerData["clan"]["id"]}
+        TAG: {playerData["clan"]["tag"]}
+        Status: {playerData["clan"]["status"]}
+
+        Level: {playerData["clan"]["level"]}
+        Experience: {playerData["clan"]["experience"]}''')
         input()
+
     if choice == "2":
         system("mode 78, 500")
         bedwarsGames = data["player"]["games"]["bedwars"]
@@ -140,6 +151,29 @@ def menu():
         The Purge: {serverInfo["games"]["thepurge"]["players"]}
         UHC: {serverInfo["games"]["uhc"]["players"]}
         Warfare: {serverInfo["games"]["warfare"]["players"]}''')
+        input()
+
+    if choice == "4":
+        system("mode 45, 20")
+        clanData = data["player"]["clan"]
+        print(f"""
+        
+                : CLAN :
+        Name: {clanData["name"]}
+        ID: {clanData["id"]}
+        TAG: {clanData["tag"]}
+        Status: {clanData["status"]}
+        Creation Date: {datetime.datetime.fromtimestamp(clanData["createdAt"] / 1000)}
+
+
+                :  XP  :
+        Level: {clanData["level"]}
+        XP: {clanData["experience"]}
+        Required XP: {clanData["requiredExperience"]}
+        Daily XP: {clanData["dailyExperience"]}
+        Monthly XP: {clanData["monthlyExperience"]}
+        Total XP: {clanData["totalExperience"]}
+        """)
         input()
     
 while True:
