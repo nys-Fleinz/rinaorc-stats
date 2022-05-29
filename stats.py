@@ -21,7 +21,6 @@ data = r.json()
 
 a = requests.get(url=f"https://api.rinaorc.com/stats/players", headers=header)
 serverInfo = a.json()
-input(serverInfo)
 
 
 def menu():
