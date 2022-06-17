@@ -15,19 +15,17 @@ with open("settings.json", "r") as f:
     config = json.load(f)
 header = {"API-Key": config["APIKey"]}
 username = input('\n\n\n\n                    [>] Player Name: ')
-r = requests.get(
-    url=f"https://api.rinaorc.com/player/{username}", headers=header)
+r = requests.get(url=f"https://api.rinaorc.com/player/{username}", headers=header)
 data = r.json()
 
 a = requests.get(url=f"https://api.rinaorc.com/stats/players", headers=header)
 serverInfo = a.json()
 
-
-def menu():
+def menu(data, serverInfo):
     clear()
     system("mode 78, 10")
     choice = input(
-        "\n                                Choose Info:\n\n        [1] User Info        [2] BedWars Info        [3] Server Info\n\n        [4] Clan Info\n\n                                 Choice: ")
+        "\n                                Choose Info:\n\n        [1] User Info        [2] BedWars Info        [3] Server Info\n\n        [4] Clan Info        [5] Change user\n\n                                 Choice: ")
     clear()
     if choice == "1":
         system("mode 78, 25")
@@ -58,6 +56,7 @@ def menu():
         Level: {playerData["clan"]["level"]}
         Experience: {playerData["clan"]["experience"]}''')
         input()
+        menu(data, serverInfo)
 
     if choice == "2":
         system("mode 78, 500")
@@ -127,6 +126,7 @@ def menu():
         Looses: {bedwarsStats["played"]["total"]["all"]-bedwarsStats["wins"]["total"]["all"]}
         ''')
         input()
+        menu(data, serverInfo)
 
     if choice == "3":
         system("mode 50, 35")
@@ -165,6 +165,7 @@ def menu():
             UHC: {serverInfo["games"]["uhc"]["players"]}
             Warfare: {serverInfo["games"]["warfare"]["players"]}''')
         input()
+        menu(data, serverInfo)
 
     if choice == "4":
         system("mode 45, 20")
@@ -188,12 +189,20 @@ def menu():
         Total XP: {clanData["totalExperience"]}
         """)
         input()
+        menu(data, serverInfo)
+        
+    if choice == "5":
+        username = input('\n\n\n\n                    [>] Player Name: ')
+        r = requests.get(url=f"https://api.rinaorc.com/player/{username}", headers=header)
+        data = r.json()
+        menu(data, serverInfo)
+
 
 
 while True:
     system("mode 78, 10")
     try:
-        menu()
+        menu(data, serverInfo)
     except:
         system("mode 78, 10")
         input(' An error has occurred. There is many reasons for that:\n 1) Rinaorc\'s API is down.\n 2) The user provided has never logged on Rinaorc.\n 3) Your API Key is not valid, change it in the settings.')
