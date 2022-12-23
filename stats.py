@@ -4,7 +4,7 @@ import json
 
 from os import system
 system("title Stats Rinaorc by Krystal#6960")
-system("mode 78, 10")
+
 
 
 def clear():
@@ -23,12 +23,12 @@ serverInfo = a.json()
 
 def menu(data, serverInfo):
     clear()
-    system("mode 78, 10")
+    
     choice = input(
-        "\n                                Choose Info:\n\n        [1] User Info        [2] BedWars Info        [3] Server Info\n\n        [4] Clan Info        [5] Change user\n\n                                 Choice: ")
+        "\n                   Choose Info:\n\n        [1] User Info        [2] BedWars Info        \n\n        [3] Clan Info        [4] Change user\n\n                    Choice: ")
     clear()
     if choice == "1":
-        system("mode 78, 25")
+        
         playerData = data["player"]
         if playerData["isOnline"] == True:
             online = "Online"
@@ -59,7 +59,7 @@ def menu(data, serverInfo):
         menu(data, serverInfo)
 
     if choice == "2":
-        system("mode 78, 500")
+        
         bedwarsGames = data["player"]["games"]["bedwars"]
         bedwarsStats = data["player"]["stats"]["bedwars"]
         print(f'''
@@ -129,46 +129,7 @@ def menu(data, serverInfo):
         menu(data, serverInfo)
 
     if choice == "3":
-        system("mode 50, 35")
-        print(f'''
-                : Server Info :
-            Active Player: {serverInfo["activePlayers"]}
-            Online Players: {serverInfo["onlinePlayers"]}
-
-                :     BAN     :
-            Total Bans: {serverInfo["punishments"]["bans"]["totalBans"]}
-            Monthly Bans: {serverInfo["punishments"]["bans"]["monthlyBans"]}
-            Weekly Bans: {serverInfo["punishments"]["bans"]["weeklyBans"]}
-            
-                :     MUTE    :
-            Total Mutes: {serverInfo["punishments"]["mutes"]["totalMutes"]}
-            Monthly Mutes: {serverInfo["punishments"]["mutes"]["monthlyMutes"]}
-            Weekly Mutes: {serverInfo["punishments"]["mutes"]["weeklyMutes"]}
-            
-            :PLAYERS IN GAME:
-
-            Login: {serverInfo["games"]["login"]["players"]}
-            
-            BedWars: {serverInfo["games"]["bedwars"]["players"]}
-            Caveaux: {serverInfo["games"]["caveaux"]["players"]}
-            Free Build: {serverInfo["games"]["freebuild"]["players"]}
-            Golem Rush: {serverInfo["games"]["golemrush"]["players"]}
-            Gun Wars: {serverInfo["games"]["gunwars"]["players"]}
-            Lobby: {serverInfo["games"]["lobbyMain"]["players"]}
-            Parkour: {serverInfo["games"]["parkour"]["players"]}
-            Pixel Perfect: {serverInfo["games"]["pixelperfect"]["players"]}
-            Practice: {serverInfo["games"]["practice"]["players"]+serverInfo["games"]["pvpbox"]["players"]+serverInfo["games"]["pvpenchants"]["players"]}
-            r/Place: {serverInfo["games"]["rplace"]["players"]}
-            Sheep Wars: {serverInfo["games"]["sheepwars"]["players"]}
-            Smash: {serverInfo["games"]["smash"]["players"]}
-            The Purge: {serverInfo["games"]["thepurge"]["players"]}
-            UHC: {serverInfo["games"]["uhc"]["players"]}
-            Warfare: {serverInfo["games"]["warfare"]["players"]}''')
-        input()
-        menu(data, serverInfo)
-
-    if choice == "4":
-        system("mode 45, 20")
+        
         clanData = data["player"]["clan"]
         print(f"""
         
@@ -191,7 +152,7 @@ def menu(data, serverInfo):
         input()
         menu(data, serverInfo)
         
-    if choice == "5":
+    if choice == "4":
         username = input('\n\n\n\n                    [>] Player Name: ')
         r = requests.get(url=f"https://api.rinaorc.com/player/{username}", headers=header)
         data = r.json()
@@ -200,9 +161,9 @@ def menu(data, serverInfo):
 
 
 while True:
-    system("mode 78, 10")
+    
     try:
         menu(data, serverInfo)
     except:
-        system("mode 78, 10")
+        
         input(' An error has occurred. There is many reasons for that:\n 1) Rinaorc\'s API is down.\n 2) The user provided has never logged on Rinaorc.\n 3) Your API Key is not valid, change it in the settings.')
